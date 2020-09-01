@@ -1,0 +1,10 @@
+.Item {
+  background: transparent;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.active {
+  color: #5b80e7;
+}

@@ -1,0 +1,47 @@
+.player_section {
+  display: flex;
+  background: transparent;
+  grid-area: player;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row wrap;
+  width: 100%;
+}
+.img_block {
+  flex: 0 0 20%;
+}
+.img {
+  width: 200px;
+  height: 155px;
+  border-radius: 50px;
+}
+
+.audio_block {
+  flex: 0 0 60%;
+}
+
+.title {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.audio {
+  margin-top: 10px;
+}
+
+.image{
+  width: 200px;
+  height: 155px;
+  border-radius: 50px;
+}
+
+
+@media all and (max-width: 767px){
+
+  .player_section{
+    justify-content: center;
+  }
+  .audio_block{
+    text-align: center;
+  }
+}

@@ -1,0 +1,28 @@
+.Game {
+  display: flex;
+  flex-flow: wrap column;
+  margin: 0 30px;
+}
+
+.current_game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "player player"
+    "list title"
+    "btn btn";
+  grid-gap: 5%;
+}
+
+@media all and (max-width: 767px) {
+  .current_game {
+    grid-template-rows: repeat(4,auto);
+    grid-template-areas:
+      "player player"
+      "list list"
+      "title title"
+      "btn btn";
+      padding-bottom: 15px;
+  }
+}

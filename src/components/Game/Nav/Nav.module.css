@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  background: rgb(171,134,241,1);
+  padding: 5px 0;
+  flex-flow: row wrap;
+  color: black;
+  margin-bottom: 30px;
+}
+
+
+
+
