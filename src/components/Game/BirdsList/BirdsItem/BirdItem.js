@@ -3,10 +3,8 @@ import classes from "./BirdItem.module.css";
 
 const BirdItem = props => {
   const cls = [classes.BirdItem];
-  
+
   if (props.state) {
-    console.log(props.state);
-    
     cls.push(classes[props.state]);
   }
 

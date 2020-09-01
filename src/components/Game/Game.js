@@ -8,10 +8,17 @@ import Nav from "../Game/Nav/Nav";
 import EndGame from "./EndGame/EndGame";
 import randomData from "../../Reducers/Random/randomData";
 
-
 randomData();
 
 class Game extends Component {
+
+
+  constructor(props){
+    super(props);
+    this.audioref = React.createRef();
+    console.log(this.audioref);
+    
+  }
   state = {
     activeQuestion: 0,
     answerState: null,
@@ -22,6 +29,9 @@ class Game extends Component {
     finished: false,
     question: randomData()
   };
+
+  
+  
 
   questionIsEnd() {
     return this.state.question.length === this.state.activeQuestion + 1;
@@ -109,6 +119,7 @@ class Game extends Component {
               showTitle={this.state.currentAnswer}
               isRight={this.state.isRight}
               score={this.state.score}
+              audioref= {this.audioref}
             />
             <Next
               disabled={!this.state.isRight}

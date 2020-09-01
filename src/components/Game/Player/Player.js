@@ -13,7 +13,7 @@ const Player = props => {
               <img
                 className={classes.image}
                 src={props.answers.image}
-                alt="birds"
+                alt={props.answers.name}
               />
             </div>
             <div className={classes.audio_block}>
@@ -34,7 +34,7 @@ const Player = props => {
             <img className={classes.img} src={logo} alt="birds" />
           </div>
           <div className={classes.audio_block}>
-            <h5 className={classes.title}>Здесь будет наименование птицы</h5>
+            <h5 className={classes.title}>****</h5>
             <hr />
             <div className={classes.audio}>
               <audio controls src={props.answers.audio}>

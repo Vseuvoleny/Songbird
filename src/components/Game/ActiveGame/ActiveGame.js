@@ -6,9 +6,10 @@ import BirdsTitle from "../BirdsTitle/BirdsTitle";
 
 const ActiveGame = props => {
 
+
   return (
     <Fragment>
-      <Player answers={props.answers} isRight={props.isRight} className={classes.player}/>
+      <Player answers={props.answers} isRight={props.isRight} className={classes.player} audioref={props.audioref}/>
       <BirdsList
         onAnswerClick={props.onAnswerClick}
         variants={props.variants}
