@@ -1,16 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import classes from "./Next.module.css";
 
-const Next = ({ disabled, NextClickHandler }) => {
+const Next = ({ isAnswerRight, nextQuestion }) => {
   const cls = [classes.Next];
-  disabled ? cls.push(classes.inactive) : cls.push(classes.active);
+  isAnswerRight ? cls.push(classes.active) : cls.push(classes.inactive);
 
   return (
     <div className={classes.btn}>
       <button
-        disabled={disabled}
+        disabled={!isAnswerRight}
         className={cls.join(" ")}
-        onClick={NextClickHandler}
+        onClick={nextQuestion}
       >
         Next Level
       </button>
@@ -18,4 +19,16 @@ const Next = ({ disabled, NextClickHandler }) => {
   );
 };
 
-export default Next;
+function mapStateToProps(state) {
+  return {
+    isAnswerRight: state.isAnswerRight
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    nextQuestion: () => dispatch({ type: "NEXT_QUESTION" })
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Next);

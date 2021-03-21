@@ -22,25 +22,8 @@ export const Game = ({ score, questions, activeQuestion, isGameFinished }) => {
         />
       ) : (
         <div className={classes.current_game}>
-          <ActiveGame
-          // answers={question[this.state.activeQuestion].answers}
-          // onAnswerClick={this.onAnswerClickHandler}
-          // activeQuestion={this.state.activeQuestion}
-          // variants={question[this.state.activeQuestion].variants}
-          // bird={question[this.state.activeQuestion].variants.name}
-          // info={question[this.state.activeQuestion].variants}
-          // state={this.state.answerState}
-          // currentAnswer={this.state.currentAnswer}
-          // showTitle={this.state.currentAnswer}
-          // isRight={this.state.isRight}
-          // score={this.state.score}
-          // audioref={this.audioref}
-          />
-          {/* 
-          <Next
-            disabled={!this.state.isRight}
-            NextClickHandler={this.NextClickHandler}
-          /> */}
+          <ActiveGame />
+          <Next />
         </div>
       )}
     </div>
