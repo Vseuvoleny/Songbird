@@ -1,17 +1,15 @@
-a{
+a {
   text-decoration: none;
   color: white;
 }
 
-.Header {
+.game-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 15px;
   margin-bottom: 30px;
+  &__link {
+    color: black;
+  }
 }
-
-.logo h1 a{
-  color: black;
-}
-

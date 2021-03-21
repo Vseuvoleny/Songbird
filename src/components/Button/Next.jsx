@@ -1,16 +1,16 @@
 import React from "react";
 import classes from "./Next.module.css";
 
-const Next = props => {
+const Next = ({ disabled, NextClickHandler }) => {
   const cls = [classes.Next];
-  props.disabled ? cls.push(classes.inactive) : cls.push(classes.active);
+  disabled ? cls.push(classes.inactive) : cls.push(classes.active);
 
   return (
     <div className={classes.btn}>
       <button
-        disabled={props.disabled}
+        disabled={disabled}
         className={cls.join(" ")}
-        onClick={props.NextClickHandler}
+        onClick={NextClickHandler}
       >
         Next Level
       </button>
