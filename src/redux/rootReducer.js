@@ -1,3 +1,5 @@
+import randomData from "../Reducers/Random/randomData";
+
 const initialState = {
   currentQuestion: 0,
   currentPlayerAnswer: null,
@@ -5,7 +7,7 @@ const initialState = {
   score: 0,
   numberOfAttempts: 5,
   isGameFinished: false,
-  questions: []
+  questions: randomData()
 };
 
 export default function rootReducer(state = initialState, action) {

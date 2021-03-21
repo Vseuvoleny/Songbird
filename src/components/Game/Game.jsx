@@ -1,69 +1,53 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import classes from "./Game.module.css";
 import ActiveGame from "./ActiveGame/ActiveGame";
 import Next from "../Button/Next";
 import Header from "../Header/Header";
-import Nav from "./Nav/Nav";
+import BirdLevels from "./Nav/BirdLevels";
 import EndGame from "./EndGame/EndGame";
 import randomData from "../../Reducers/Random/randomData";
 import { connect } from "react-redux";
 // randomData();
 
-export const Game = ({ score }) => {
+export const Game = ({ score, questions, activeQuestion, isGameFinished }) => {
   return (
     <div className={classes.Game}>
       <Header score={score} />
-      {/*
-        <Nav state={this.state.activeQuestion} />
 
-      {this.state.finished ? (
+      <BirdLevels />
+      {isGameFinished ? (
         <EndGame
-          score={this.state.score}
-          summary={(question.length - 1) * question[0].variants.length}
-          repeatStage={this.repeatGameHandler}
+        // summary={(question.length - 1) * question[0].variants.length}
+        // repeatStage={this.repeatGameHandler}
         />
       ) : (
         <div className={classes.current_game}>
           <ActiveGame
-            answers={question[this.state.activeQuestion].answers}
-            onAnswerClick={this.onAnswerClickHandler}
-            activeQuestion={this.state.activeQuestion}
-            variants={question[this.state.activeQuestion].variants}
-            bird={question[this.state.activeQuestion].variants.name}
-            info={question[this.state.activeQuestion].variants}
-            state={this.state.answerState}
-            currentAnswer={this.state.currentAnswer}
-            showTitle={this.state.currentAnswer}
-            isRight={this.state.isRight}
-            score={this.state.score}
-            audioref={this.audioref}
+          // answers={question[this.state.activeQuestion].answers}
+          // onAnswerClick={this.onAnswerClickHandler}
+          // activeQuestion={this.state.activeQuestion}
+          // variants={question[this.state.activeQuestion].variants}
+          // bird={question[this.state.activeQuestion].variants.name}
+          // info={question[this.state.activeQuestion].variants}
+          // state={this.state.answerState}
+          // currentAnswer={this.state.currentAnswer}
+          // showTitle={this.state.currentAnswer}
+          // isRight={this.state.isRight}
+          // score={this.state.score}
+          // audioref={this.audioref}
           />
+          {/* 
           <Next
             disabled={!this.state.isRight}
             NextClickHandler={this.NextClickHandler}
-          />
+          /> */}
         </div>
-      )} */}
+      )}
     </div>
   );
 };
 
 // class Game extends Component {
-
-//   constructor(props){
-//     super(props);
-//     this.audioref = React.createRef();
-//   }
-//   state = {
-//     activeQuestion: 0,
-//     answerState: null,
-//     currentAnswer: null,
-//     isRight: false,
-//     score: 0,
-//     numofTrying: 5,
-//     finished: false,
-//     question: randomData()
-//   };
 
 //   questionIsEnd() {
 //     return this.state.question.length === this.state.activeQuestion + 1;
@@ -123,43 +107,6 @@ export const Game = ({ score }) => {
 
 //   render() {
 //     const question = this.state.question;
-
-//     return (
-//       <div className={classes.Game}>
-//         <Header score={this.state.score} />
-//           <Nav state={this.state.activeQuestion} />
-
-//         {this.state.finished ? (
-//           <EndGame
-//             score={this.state.score}
-//             summary={(question.length - 1) * question[0].variants.length}
-//             repeatStage={this.repeatGameHandler}
-//           />
-//         ) : (
-//           <div className={classes.current_game}>
-//             <ActiveGame
-//               answers={question[this.state.activeQuestion].answers}
-//               onAnswerClick={this.onAnswerClickHandler}
-//               activeQuestion={this.state.activeQuestion}
-//               variants={question[this.state.activeQuestion].variants}
-//               bird={question[this.state.activeQuestion].variants.name}
-//               info={question[this.state.activeQuestion].variants}
-//               state={this.state.answerState}
-//               currentAnswer={this.state.currentAnswer}
-//               showTitle={this.state.currentAnswer}
-//               isRight={this.state.isRight}
-//               score={this.state.score}
-//               audioref= {this.audioref}
-//             />
-//             <Next
-//               disabled={!this.state.isRight}
-//               NextClickHandler={this.NextClickHandler}
-//             />
-//           </div>
-//         )}
-//       </div>
-//     );
-//   }
 // }
 
 function mapStateToProps(state) {

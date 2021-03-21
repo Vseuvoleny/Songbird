@@ -1,24 +1,33 @@
-import React from "react";
-import classes from "./Player.module.css";
+import React, { useState, useEffect } from "react";
 import logo from "./images/swift.png";
+import { connect } from "react-redux";
+import "./styles.scss";
 
-const Player = props => {
+const Player = ({ isAnswerRight, questions, currentLevel }) => {
+  useEffect(() => {
+    setCurrentQuestion(questions[currentLevel]);
+  }, [currentLevel]);
+
+  const [currentQuestion, setCurrentQuestion] = useState(
+    questions[currentLevel]
+  );
+
   return (
     <>
-      {props.isRight ? (
-        <section className={classes.player_section}>
-          <div className={classes.img_block}>
+      {isAnswerRight ? (
+        <section className="player_section">
+          <div className="img_block">
             <img
-              className={classes.image}
-              src={props.answers.image}
-              alt={props.answers.name}
+              className="img"
+              src={currentQuestion.rightAnswer.image}
+              alt={currentQuestion.rightAnswer.name}
             />
           </div>
-          <div className={classes.audio_block}>
-            <h5 className={classes.title}>{props.answers.name}</h5>
+          <div className="audio_block">
+            <h5 className="title">{currentQuestion.rightAnswer.name}</h5>
             <hr />
-            <div className={classes.audio}>
-              <audio controls src={props.answers.audio}>
+            <div className="audio">
+              <audio controls src={currentQuestion.rightAnswer.audio}>
                 Your browser does not support the
                 <code>audio</code> element.
               </audio>
@@ -26,15 +35,15 @@ const Player = props => {
           </div>
         </section>
       ) : (
-        <section className={classes.player_section}>
-          <div className={classes.img_block}>
-            <img className={classes.img} src={logo} alt="birds" />
+        <section className="player_section">
+          <div className="img_block">
+            <img className="img" src={logo} alt="birds" />
           </div>
-          <div className={classes.audio_block}>
-            <h5 className={classes.title}>****</h5>
+          <div className="audio_block">
+            <h5 className="title">****</h5>
             <hr />
-            <div className={classes.audio}>
-              <audio controls src={props.answers.audio}>
+            <div className="audio">
+              <audio controls src={currentQuestion.rightAnswer.audio}>
                 Your browser does not support the
                 <code>audio</code> element.
               </audio>
@@ -46,4 +55,12 @@ const Player = props => {
   );
 };
 
-export default Player;
+function mapStateToProps(state) {
+  return {
+    isAnswerRight: state.isAnswerRight,
+    questions: state.questions,
+    currentLevel: state.currentQuestion
+  };
+}
+
+export default connect(mapStateToProps)(Player);

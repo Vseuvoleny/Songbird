@@ -1,23 +1,29 @@
 import React from "react";
-import classes from "./EndGame.module.css";
+import { connect } from "react-redux";
+import "./styles.scss";
 
-const EndGame = props => {
+const EndGame = ({ score }) => {
   return (
-    <div className={classes.EndGame}>
-      <h1>Поздравляем!</h1>
+    <div className="end-game">
+      <span className="end-game__title">Поздравляем!</span>
 
-      {props.score === props.summary ? (
-        <p>Вы набрали максимальное количество баллов! Вы настоящий птицевед!</p>
+      {score === 30 ? (
+        <p className="end-game__compliment">
+          Вы набрали максимальное количество баллов! Вы настоящий птицевед!
+        </p>
       ) : (
-        <p>
-          Вы прошли викторину и набрали {props.score} из {props.summary}{" "}
-          возможных баллов
+        <p className="end-game__compliment">
+          Вы прошли викторину и набрали {score} из {30} возможных баллов
         </p>
       )}
 
-      <button onClick={props.repeatStage}>Попробовать еще раз!</button>
+      <button className="end-game__repeat-btn">Попробовать еще раз!</button>
     </div>
   );
 };
-
-export default EndGame;
+function mapStateToProps(state) {
+  return {
+    score: state.score
+  };
+}
+export default connect(mapStateToProps)(EndGame);

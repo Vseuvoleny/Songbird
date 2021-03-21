@@ -1,10 +1,10 @@
 import birdsData from "../../Data/birdsData";
-import random from "../../utils/randomize";
+import randomize from "../../utils/randomize";
 
-export default function randomData() {
-  const birdsRound = birdsData.map((birdArr, _idx) => {
-    return { answers: birdArr[random(birdArr.length)], variants: birdArr };
-  });
+const randomData = () =>
+  birdsData.map(birds => ({
+    rightAnswer: birds[randomize(birds.length)],
+    variants: birds
+  }));
 
-  return birdsRound;
-}
+export default randomData;
