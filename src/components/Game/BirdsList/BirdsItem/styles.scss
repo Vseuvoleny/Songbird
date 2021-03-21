@@ -1,0 +1,41 @@
+.bird-item {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.7s linear;
+  border: 0;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba(33, 232, 148, 1) 18%,
+      rgba(65, 134, 58, 1) 65%
+    );
+  }
+  &:first-of-type {
+    border-radius: 10px 10px 0 0;
+  }
+  &:last-of-type {
+    border-radius: 0 0 10px 10px;
+  }
+  &:before {
+    margin-left: 2vw;
+    margin-right: 3vw;
+    display: inline-block;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+  }
+  & + & {
+    border-top: 1px solid black;
+  }
+  &.succes {
+    background: #66e821;
+  }
+  &.error {
+    background: #e82521;
+  }
+}

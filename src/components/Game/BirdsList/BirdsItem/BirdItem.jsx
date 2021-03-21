@@ -1,19 +1,10 @@
 import React from "react";
-import classes from "./BirdItem.module.css";
+import "./styles.scss";
 
-const BirdItem = props => {
-  const cls = [classes.BirdItem];
-
-  if (props.state) {
-    cls.push(classes[props.state]);
-  }
-
+const BirdItem = ({ title, setPlayerAnswer, answer }) => {
   return (
-    <li
-      className={cls.join(" ")}
-      onClick={() => props.onAnswerClick(props.info)}
-    >
-      {props.info.name}
+    <li className="bird-item" onClick={() => setPlayerAnswer(answer)}>
+      {title}
     </li>
   );
 };

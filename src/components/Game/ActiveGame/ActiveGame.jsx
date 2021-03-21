@@ -8,15 +8,9 @@ const ActiveGame = props => {
   return (
     <>
       <Player />
-
       <BirdsList />
       {/*  onAnswerClick={props.onAnswerClick} */}
-
-      {/*
-      <BirdsTitle
-        currentAnswer={props.currentAnswer}
-        showTitle={props.showTitle}
-      /> */}
+      <BirdsTitle />
     </>
   );
 };

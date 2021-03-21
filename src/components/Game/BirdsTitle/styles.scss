@@ -6,13 +6,12 @@
     "img title"
     "p p";
   grid-gap: 0 2vw;
-  background: rgb(171,134,241,1);
+  background: rgba(171, 134, 241, 1);
   color: #ffffff;
   padding: 15px;
   border-radius: 10px;
   height: 100%;
   grid-area: title;
-  
 }
 
 .about_rules {
@@ -22,6 +21,9 @@
   text-align: start;
   padding: 2vh 0 0 2vw;
   color: black;
+  & > * {
+    display: block;
+  }
 }
 .img_about {
   grid-area: img;

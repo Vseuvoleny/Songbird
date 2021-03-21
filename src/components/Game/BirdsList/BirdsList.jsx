@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
-import classes from "./BirdsList.module.css";
 import BirdItem from "./BirdsItem/BirdItem";
 import { connect } from "react-redux";
+import "./styles.scss";
 
-const BirdsList = ({ questions, currentLevel }) => {
+const BirdsList = ({
+  questions,
+  currentLevel,
+  setPlayerAnswer,
+  currentPlayerAnswer,
+  score
+}) => {
   useEffect(() => {
     setVariants(questions[currentLevel].variants);
   }, [currentLevel]);
+
   const [variants, setVariants] = useState(questions[currentLevel].variants);
 
   return (
-    <ul className={classes.birds_name}>
+    <ul className="birds_name">
       {variants.map(bird => {
         return (
           <BirdItem
             key={bird.id}
-            // answer={props.id}
-            // answers={props.answers}
-            // onAnswerClick={props.onAnswerClick}
-            // info={bird}
-            // state={props.state ? props.state[bird.id] : null}
+            title={bird.name}
+            setPlayerAnswer={setPlayerAnswer}
+            answer={bird.id}
           />
         );
       })}
@@ -30,8 +35,16 @@ const BirdsList = ({ questions, currentLevel }) => {
 function mapStateToProps(state) {
   return {
     questions: state.questions,
-    currentLevel: state.currentQuestion
+    currentLevel: state.currentQuestion,
+    currentPlayerAnswer: state.currentPlayerAnswer,
+    score: state.score
   };
 }
 
-export default connect(mapStateToProps)(BirdsList);
+function mapDispatchToProps(dispatch) {
+  return {
+    setPlayerAnswer: answer => dispatch({ type: "setAnswer", payload: answer })
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BirdsList);
