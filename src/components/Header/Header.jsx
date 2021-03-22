@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./styles.scss";
 
 const Header = ({ score }) => (
@@ -13,4 +14,11 @@ const Header = ({ score }) => (
     <div>Score: {score}</div>
   </header>
 );
-export default Header;
+
+function mapStateToProps(state) {
+  return {
+    score: state.score
+  };
+}
+
+export default connect(mapStateToProps)(Header);

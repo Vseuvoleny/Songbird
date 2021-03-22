@@ -6,6 +6,7 @@ import "./styles.scss";
 const BirdsList = ({ questions, currentLevel }) => {
   useEffect(() => {
     setVariants(questions[currentLevel].variants);
+    setroundAnswer(questions[currentLevel].rightAnswer.id);
   }, [currentLevel]);
 
   const [variants, setVariants] = useState(questions[currentLevel].variants);

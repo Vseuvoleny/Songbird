@@ -34,7 +34,27 @@ export default function rootReducer(state = initialState, action) {
     case "NEXT_QUESTION":
       return {
         ...state,
+        currentPlayerAnswer: null,
+        isAnswerRight: false,
+        numberOfAttempts: 5,
         currentQuestion: state.currentQuestion + 1
+      };
+
+    case "GAME_OVER":
+      return {
+        ...state,
+        isGameFinished: true
+      };
+
+    case "NEW_GAME":
+      return {
+        currentQuestion: 0,
+        currentPlayerAnswer: null,
+        isAnswerRight: false,
+        score: 0,
+        numberOfAttempts: 5,
+        isGameFinished: false,
+        questions: randomData()
       };
   }
 
