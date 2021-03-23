@@ -27,21 +27,23 @@
 
 .audio {
   margin-top: 10px;
+  .answer_effect.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
-.image{
+.image {
   width: 200px;
   height: 155px;
   border-radius: 50px;
 }
 
-
-@media all and (max-width: 767px){
-
-  .player_section{
+@media all and (max-width: 767px) {
+  .player_section {
     justify-content: center;
   }
-  .audio_block{
+  .audio_block {
     text-align: center;
   }
 }

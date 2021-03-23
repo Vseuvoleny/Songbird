@@ -1,19 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "./images/swift.png";
+import { fail, success } from "./MusicData/index";
 import { connect } from "react-redux";
 import "./styles.scss";
 
-const Player = ({ isAnswerRight, questions, currentLevel }) => {
+const Player = ({
+  isAnswerRight,
+  questions,
+  currentLevel,
+  currentPlayerAnswer
+}) => {
   useEffect(() => {
     setCurrentQuestion(questions[currentLevel]);
   }, [currentLevel]);
+
+  useEffect(() => {
+    if (currentPlayerAnswer) {
+      ref.current.play();
+    }
+  }, [currentPlayerAnswer]);
 
   const [currentQuestion, setCurrentQuestion] = useState(
     questions[currentLevel]
   );
 
+  const ref = useRef(null);
+
   return (
     <>
+      <div className="answer_effect hidden">
+        <audio ref={ref} src={isAnswerRight ? success : fail}>
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+      </div>
       {isAnswerRight ? (
         <section className="player_section">
           <div className="img_block">
@@ -59,7 +79,8 @@ function mapStateToProps(state) {
   return {
     isAnswerRight: state.isAnswerRight,
     questions: state.questions,
-    currentLevel: state.currentQuestion
+    currentLevel: state.currentQuestion,
+    currentPlayerAnswer: state.currentPlayerAnswer
   };
 }
 

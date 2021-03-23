@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./styles.scss";
 
-const BirdsTitle = ({ questions, isAnswerRight, currentQuestion }) => {
+const BirdsTitle = ({ questions, currentQuestion, currentPlayerAnswer }) => {
   useEffect(() => {
-    setCurrentAnswer(questions[currentQuestion]);
-  }, [currentQuestion]);
+    const currentAnswer = questions[currentQuestion].variants.find(
+      bird => currentPlayerAnswer === bird.id
+    );
+    setCurrentAnswer(currentAnswer);
+  }, [currentPlayerAnswer]);
 
-  const [currentAnswer, setCurrentAnswer] = useState(
-    questions[currentQuestion]
-  );
+  const [currentAnswer, setCurrentAnswer] = useState(undefined);
 
   return (
     <section className="section_about">
-      {isAnswerRight ? (
+      {currentAnswer ? (
         <>
           <div className="img_about">
             <img src={currentAnswer.image} alt={currentAnswer.name} />
@@ -41,8 +42,8 @@ const BirdsTitle = ({ questions, isAnswerRight, currentQuestion }) => {
 function mapStateToProps(state) {
   return {
     questions: state.questions,
-    isAnswerRight: state.isAnswerRight,
-    currentQuestion: state.currentQuestion
+    currentQuestion: state.currentQuestion,
+    currentPlayerAnswer: state.currentPlayerAnswer
   };
 }
 

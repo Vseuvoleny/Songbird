@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import classes from "./Game.module.css";
-import ActiveGame from "./ActiveGame/ActiveGame";
+import { connect } from "react-redux";
 import Next from "../Button/Next";
 import Header from "../Header/Header";
-import BirdLevels from "./Nav/BirdLevels";
+import ActiveGame from "./ActiveGame/ActiveGame";
 import EndGame from "./EndGame/EndGame";
-import { connect } from "react-redux";
+import BirdLevels from "./Nav/BirdLevels";
+import "./styles.scss";
 
 export const Game = ({ isGameFinished, currentLevel, questions, gameOver }) => {
   useEffect(() => {
@@ -14,13 +14,13 @@ export const Game = ({ isGameFinished, currentLevel, questions, gameOver }) => {
     }
   }, [currentLevel]);
   return (
-    <div className={classes.Game}>
+    <div className="Game">
       <Header />
       <BirdLevels />
       {isGameFinished ? (
         <EndGame />
       ) : (
-        <div className={classes.current_game}>
+        <div className="current_game">
           <ActiveGame />
           <Next />
         </div>

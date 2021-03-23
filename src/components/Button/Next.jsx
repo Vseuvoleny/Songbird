@@ -1,16 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import classes from "./Next.module.css";
-
+import "./styles.scss";
 const Next = ({ isAnswerRight, nextQuestion }) => {
-  const cls = [classes.Next];
-  isAnswerRight ? cls.push(classes.active) : cls.push(classes.inactive);
-
   return (
-    <div className={classes.btn}>
+    <div className="button_next_container">
       <button
         disabled={!isAnswerRight}
-        className={cls.join(" ")}
+        className="button"
         onClick={nextQuestion}
       >
         Next Level
