@@ -14,7 +14,7 @@ const birdTitle = {
   seaBirds: "Морские птицы"
 };
 
-const BirdLevels = ({ questions }) => {
+const BirdLevels = ({ questions, currentQuestion }) => {
   const getLevelTitle = index => {
     switch (index) {
       case 0:
@@ -36,7 +36,11 @@ const BirdLevels = ({ questions }) => {
 
   const renderLevels = questions =>
     questions.map((_bird, idx) => (
-      <BirdLevel title={getLevelTitle(idx)} key={idx} />
+      <BirdLevel
+        title={getLevelTitle(idx)}
+        key={idx}
+        addActive={currentQuestion === idx ? "active" : null}
+      />
     ));
 
   return <ul className="navigation-list">{renderLevels(questions)}</ul>;
@@ -44,6 +48,7 @@ const BirdLevels = ({ questions }) => {
 
 function mapStateToProps(state) {
   return {
+    currentQuestion: state.currentQuestion,
     questions: state.questions
   };
 }

@@ -18,13 +18,14 @@ const BirdsList = ({ questions, currentLevel }) => {
 
   return (
     <ul className="birds_name">
-      {variants.map(bird => {
+      {variants.map((bird, idx) => {
         return (
           <BirdItem
             key={bird.id}
             title={bird.name}
             answer={bird.id}
             checkIsAnswerRight={checkIsAnswerRight}
+            addSuccess={bird.id === idx ? "success" : "error"}
           />
         );
       })}
