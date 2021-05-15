@@ -3,19 +3,17 @@ import { connect } from "react-redux";
 import BirdLevel from "./bird-level/BirdLevel";
 import "./styles.scss";
 
-// TODO вовремя рефактор на TS ввести enum для определения уровня вместо хардкора
-
-const birdTitle = {
-  training: "Разминка",
-  songBird: "Певчие птицы",
-  sparrows: "Воробьиные птицы",
-  forestBird: "Лесные птицы",
-  predatorBirds: "Хищные птицы",
-  seaBirds: "Морские птицы"
-};
+enum birdTitle {
+  training = "Разминка",
+  songBird = "Певчие птицы",
+  sparrows = "Воробьиные птицы",
+  forestBird = "Лесные птицы",
+  predatorBirds = "Хищные птицы",
+  seaBirds = "Морские птицы"
+}
 
 const BirdLevels = ({ questions, currentQuestion }) => {
-  const getLevelTitle = index => {
+  const getLevelTitle = (index: number) => {
     switch (index) {
       case 0:
         return birdTitle.training;

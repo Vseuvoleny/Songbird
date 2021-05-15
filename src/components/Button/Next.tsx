@@ -1,7 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./styles.scss";
-const Next = ({ isAnswerRight, nextQuestion }) => {
+
+interface INext {
+  isAnswerRight: boolean;
+  nextQuestion: any;
+}
+
+const Next: React.FC<INext> = ({ isAnswerRight, nextQuestion }) => {
   return (
     <div className="button_next_container">
       <button
@@ -15,13 +21,13 @@ const Next = ({ isAnswerRight, nextQuestion }) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     isAnswerRight: state.isAnswerRight
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return {
     nextQuestion: () => dispatch({ type: "NEXT_QUESTION" })
   };

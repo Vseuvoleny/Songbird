@@ -7,7 +7,19 @@ import EndGame from "./EndGame/EndGame";
 import BirdLevels from "./Nav/BirdLevels";
 import "./styles.scss";
 
-export const Game = ({ isGameFinished, currentLevel, questions, gameOver }) => {
+interface IGame {
+  isGameFinished: boolean;
+  currentLevel: number;
+  questions: any[];
+  gameOver: Function;
+}
+
+export const Game: React.FC<IGame> = ({
+  isGameFinished,
+  currentLevel,
+  questions,
+  gameOver
+}) => {
   useEffect(() => {
     if (currentLevel === questions.length) {
       gameOver();
@@ -29,7 +41,7 @@ export const Game = ({ isGameFinished, currentLevel, questions, gameOver }) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     questions: state.questions,
     currentLevel: state.currentQuestion,
@@ -37,7 +49,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return {
     gameOver: () => dispatch({ type: "GAME_OVER" })
   };

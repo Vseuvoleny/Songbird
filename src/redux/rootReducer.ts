@@ -10,7 +10,7 @@ const initialState = {
   questions: randomData()
 };
 
-export default function rootReducer(state = initialState, action) {
+export default function rootReducer(state = initialState, action: any) {
   switch (action.type) {
     case "PLAYER_ANSWER":
       return {
@@ -61,6 +61,3 @@ export default function rootReducer(state = initialState, action) {
   return state;
 }
 
-// const setAnswer = {
-//   type: "setAnswer"
-// };

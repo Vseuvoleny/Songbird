@@ -5,7 +5,7 @@ import "./styles.scss";
 const BirdsTitle = ({ questions, currentQuestion, currentPlayerAnswer }) => {
   useEffect(() => {
     const currentAnswer = questions[currentQuestion].variants.find(
-      bird => currentPlayerAnswer === bird.id
+      (bird) => currentPlayerAnswer === bird.id
     );
     setCurrentAnswer(currentAnswer);
   }, [currentPlayerAnswer]);
@@ -39,11 +39,11 @@ const BirdsTitle = ({ questions, currentQuestion, currentPlayerAnswer }) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     questions: state.questions,
     currentQuestion: state.currentQuestion,
-    currentPlayerAnswer: state.currentPlayerAnswer
+    currentPlayerAnswer: state.currentPlayerAnswer,
   };
 }
 

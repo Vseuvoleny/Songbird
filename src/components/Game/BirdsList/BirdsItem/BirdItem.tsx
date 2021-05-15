@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import "./styles.scss";
 import { connect } from "react-redux";
 
-const BirdItem = ({
+interface IBirdItem{
+  title: string,
+  setPlayerAnswer: Function,
+  answer: any,
+  checkIsAnswerRight: 
+}
+
+const BirdItem: React.FC<IBirdItem> = ({
   title,
   setPlayerAnswer,
   answer,
@@ -11,7 +18,7 @@ const BirdItem = ({
   numberOfAttempts,
   subAttempts
 }) => {
-  const handlePlayerAnswer = e => {
+  const handlePlayerAnswer = (e: MouseEvent) => {
     const target = e.target;
 
     setPlayerAnswer(answer);
@@ -26,7 +33,7 @@ const BirdItem = ({
 
   const [isRightAnswer, setIsRightAnswer] = useState("");
 
-  const subAttemtps = attempts => {
+  const subAttemtps = (attempts: number) => {
     if (attempts > 0) {
       subAttempts();
     }
@@ -40,17 +47,17 @@ const BirdItem = ({
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps({numberOfAttempts}: any) {
   return {
-    numberOfAttempts: state.numberOfAttempts
+    numberOfAttempts: numberOfAttempts
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return {
-    setPlayerAnswer: answer =>
+    setPlayerAnswer: (answer: any) =>
       dispatch({ type: "PLAYER_ANSWER", payload: answer }),
-    answerWasRight: numberOfAttempts =>
+    answerWasRight: (numberOfAttempts: number) =>
       dispatch({ type: "ANSWER_WAS_RIGHT", payload: numberOfAttempts }),
     subAttempts: () => dispatch({ type: "ANSWER_WAS_WRONG" })
   };

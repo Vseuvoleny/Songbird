@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import "./styles.scss";
 
-const Header = ({ score }) => (
+interface IHeader {
+  score: number;
+}
+
+const Header: React.FC<IHeader> = ({ score }) => (
   <header className="game-header">
     <div>
       <h1>
@@ -15,7 +19,7 @@ const Header = ({ score }) => (
   </header>
 );
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     score: state.score
   };

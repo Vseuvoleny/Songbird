@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import BirdItem from "./BirdsItem/BirdItem";
 import { connect } from "react-redux";
 import "./styles.scss";
@@ -13,12 +13,12 @@ const BirdsList = ({ questions, currentLevel }) => {
   const [roundAnswer, setroundAnswer] = useState(
     questions[currentLevel].rightAnswer.id
   );
-
-  const checkIsAnswerRight = answer => roundAnswer === answer;
+  const ref = useRef(null);
+  const checkIsAnswerRight = (answer: number) => roundAnswer === answer;
 
   return (
-    <ul className="birds_name">
-      {variants.map((bird, idx) => {
+    <ul ref={ref} className="birds_name">
+      {variants.map((bird: any, idx: number) => {
         return (
           <BirdItem
             key={bird.id}
@@ -33,7 +33,7 @@ const BirdsList = ({ questions, currentLevel }) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     questions: state.questions,
     currentLevel: state.currentQuestion,

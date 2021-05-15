@@ -2,7 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import "./styles.scss";
 
-const EndGame = ({ score, questions, startNewGame }) => {
+interface IEndGame {
+  score: number;
+  questions: any[];
+  startNewGame: Function;
+}
+
+const EndGame: React.FC<IEndGame> = ({ score, questions, startNewGame }) => {
   const repeatGame = () => startNewGame();
 
   return (
@@ -26,14 +32,14 @@ const EndGame = ({ score, questions, startNewGame }) => {
     </div>
   );
 };
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     score: state.score,
     questions: state.questions
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return {
     startNewGame: () => dispatch({ type: "NEW_GAME" })
   };
