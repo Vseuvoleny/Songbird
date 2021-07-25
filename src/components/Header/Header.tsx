@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { State } from "../../types/types";
 import "./styles.scss";
 
 type Header = {
@@ -17,10 +18,6 @@ const Header: React.FC<Header> = ({ score }) => (
   </header>
 );
 
-function mapStateToProps(state: any) {
-  return {
-    score: state.score,
-  };
-}
-
-export default connect(mapStateToProps)(Header);
+export default connect((state: State) => ({
+  score: state.score,
+}))(Header);

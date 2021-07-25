@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import BirdItem from "./BirdsItem/BirdItem";
 import { connect } from "react-redux";
 import { BirdsData, State, BirdsAnswer } from "../../../types/types";
@@ -14,7 +14,6 @@ const BirdsList: React.FC<BirdsList> = ({ questions, currentLevel }) => {
   const [roundAnswer, setRoundAnswer] = useState(
     questions[currentLevel].rightAnswer.id
   );
-  const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     setVariants(questions[currentLevel].variants);
@@ -24,7 +23,7 @@ const BirdsList: React.FC<BirdsList> = ({ questions, currentLevel }) => {
   const checkIsAnswerRight = (answer: number) => roundAnswer === answer;
 
   return (
-    <ul ref={ref} className="birds_name">
+    <ul className="birds_name">
       {variants.map((bird: BirdsData) => {
         return (
           <BirdItem
@@ -39,18 +38,9 @@ const BirdsList: React.FC<BirdsList> = ({ questions, currentLevel }) => {
   );
 };
 
-function mapStateToProps({
-  questions,
-  currentQuestion,
-  currentPlayerAnswer,
-  score,
-}: State) {
-  return {
-    questions: questions,
-    currentLevel: currentQuestion,
-    currentPlayerAnswer: currentPlayerAnswer,
-    score: score,
-  };
-}
-
-export default connect(mapStateToProps)(BirdsList);
+export default connect((state: State) => ({
+  questions: state.questions,
+  currentLevel: state.currentQuestion,
+  currentPlayerAnswer: state.currentPlayerAnswer,
+  score: state.score,
+}))(BirdsList);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { BirdsAnswer, BirdsData } from "../../../types/types";
+import { BirdsAnswer, BirdsData, State } from "../../../types/types";
 import "./styles.scss";
 
 type BirdsTitle = {
@@ -53,13 +53,9 @@ const BirdsTitle: React.FC<BirdsTitle> = ({
   );
 };
 
-function mapStateToProps(state: any) {
-  return {
-    questions: state.questions,
-    currentQuestion: state.currentQuestion,
-    currentPlayerAnswer: state.currentPlayerAnswer,
-    isAnswerRight: state.isAnswerRight,
-  };
-}
-
-export default connect(mapStateToProps)(BirdsTitle);
+export default connect((state: State) => ({
+  questions: state.questions,
+  currentQuestion: state.currentQuestion,
+  currentPlayerAnswer: state.currentPlayerAnswer,
+  isAnswerRight: state.isAnswerRight,
+}))(BirdsTitle);

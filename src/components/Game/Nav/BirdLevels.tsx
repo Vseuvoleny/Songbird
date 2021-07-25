@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BirdsAnswer, State } from "../../../types/types";
 import BirdLevel from "./bird-level/BirdLevel";
 import "./styles.scss";
 
@@ -13,7 +14,7 @@ enum birdTitle {
 }
 
 type BirdsLevels = {
-  questions: any;
+  questions: BirdsAnswer[];
   currentQuestion: number;
 };
 
@@ -37,23 +38,20 @@ const BirdLevels = ({ questions, currentQuestion }: BirdsLevels) => {
     }
   };
 
-  const renderLevels = (questions: any) =>
-    questions.map((_bird: any, idx: number) => (
-      <BirdLevel
-        title={getLevelTitle(idx)}
-        key={idx}
-        addActive={currentQuestion === idx ? "active" : ""}
-      />
-    ));
-
-  return <ul className="navigation-list">{renderLevels(questions)}</ul>;
+  return (
+    <ul className="navigation-list">
+      {questions.map((_bird: any, idx: number) => (
+        <BirdLevel
+          title={getLevelTitle(idx)}
+          key={idx}
+          addActive={currentQuestion === idx ? "active" : ""}
+        />
+      ))}
+    </ul>
+  );
 };
 
-function mapStateToProps(state: { currentQuestion: any; questions: any }) {
-  return {
-    currentQuestion: state.currentQuestion,
-    questions: state.questions,
-  };
-}
-
-export default connect(mapStateToProps)(BirdLevels);
+export default connect((state: State) => ({
+  currentQuestion: state.currentQuestion,
+  questions: state.questions,
+}))(BirdLevels);

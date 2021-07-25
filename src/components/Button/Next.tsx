@@ -4,7 +4,7 @@ import "./styles.scss";
 
 type NextButton = {
   isAnswerRight: boolean;
-  nextQuestion: any;
+  nextQuestion: () => {};
 };
 
 const Next: React.FC<NextButton> = ({ isAnswerRight, nextQuestion }) => {

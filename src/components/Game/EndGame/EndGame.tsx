@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BirdsData } from "../../../types/types";
+import { State, BirdsAnswer } from "../../../types/types";
 import "./styles.scss";
 
 type EndGame = {
   score: number;
-  questions: BirdsData[];
+  questions: BirdsAnswer[];
   startNewGame: Function;
 };
 
@@ -33,16 +33,13 @@ const EndGame: React.FC<EndGame> = ({ score, questions, startNewGame }) => {
     </div>
   );
 };
-function mapStateToProps(state: any) {
-  return {
+
+export default connect(
+  (state: State) => ({
     score: state.score,
     questions: state.questions,
-  };
-}
-
-function mapDispatchToProps(dispatch: any) {
-  return {
+  }),
+  (dispatch) => ({
     startNewGame: () => dispatch({ type: "NEW_GAME" }),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(EndGame);
+  })
+)(EndGame);

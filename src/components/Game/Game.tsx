@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { BirdsAnswer, State } from "../../types/types";
 import Next from "../Button/Next";
 import Header from "../Header/Header";
 import BirdsList from "./BirdsList/BirdsList";
@@ -11,22 +12,22 @@ import "./styles.scss";
 
 interface IGame {
   isGameFinished: boolean;
-  currentLevel: number;
-  questions: any[];
+  currentQuestion: number;
+  questions: BirdsAnswer[];
   gameOver: Function;
 }
 
 export const Game: React.FC<IGame> = ({
   isGameFinished,
-  currentLevel,
+  currentQuestion,
   questions,
   gameOver,
 }) => {
   useEffect(() => {
-    if (currentLevel === questions.length) {
+    if (currentQuestion === questions.length) {
       gameOver();
     }
-  }, [currentLevel]);
+  }, [currentQuestion]);
   return (
     <div className="Game">
       <Header />
@@ -46,9 +47,9 @@ export const Game: React.FC<IGame> = ({
 };
 
 export default connect(
-  (state: any) => ({
+  (state: State) => ({
     questions: state.questions,
-    currentLevel: state.currentQuestion,
+    currentQuestion: state.currentQuestion,
     isGameFinished: state.isGameFinished,
   }),
   (dispatch) => ({

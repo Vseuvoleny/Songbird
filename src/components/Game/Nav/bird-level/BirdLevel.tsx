@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 
 type BirdsLevel = {
-  title: any;
+  title: string | undefined;
   addActive: string;
 };
 const BirdLevel = ({ title, addActive }: BirdsLevel) => (

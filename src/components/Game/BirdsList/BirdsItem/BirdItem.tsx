@@ -54,16 +54,6 @@ const BirdItem: React.FC<IBirdItem> = ({
   );
 };
 
-function mapDispatchToProps(dispatch: any) {
-  return {
-    setPlayerAnswer: (answer: number) =>
-      dispatch({ type: "PLAYER_ANSWER", payload: answer }),
-    answerWasRight: (numberOfAttempts: number) =>
-      dispatch({ type: "ANSWER_WAS_RIGHT", payload: numberOfAttempts }),
-    subAttempts: () => dispatch({ type: "ANSWER_WAS_WRONG" }),
-  };
-}
-
 export default connect(
   (state: any) => ({
     numberOfAttempts: state.numberOfAttempts,
@@ -72,5 +62,11 @@ export default connect(
     isAnswerRight: state.isAnswerRight,
     currentLevel: state.currentLevel,
   }),
-  mapDispatchToProps
+  (dispatch) => ({
+    setPlayerAnswer: (answer: number) =>
+      dispatch({ type: "PLAYER_ANSWER", payload: answer }),
+    answerWasRight: (numberOfAttempts: number) =>
+      dispatch({ type: "ANSWER_WAS_RIGHT", payload: numberOfAttempts }),
+    subAttempts: () => dispatch({ type: "ANSWER_WAS_WRONG" }),
+  })
 )(BirdItem);
