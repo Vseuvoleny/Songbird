@@ -5,13 +5,11 @@ import "./styles.scss";
 
 type IBirdItem = {
   title: string;
-  setPlayerAnswer: Function;
   answer: number;
   checkIsAnswerRight: Function;
   answerWasRight: Function;
   numberOfAttempts: number;
   subAttempts: Function;
-  questions: BirdsAnswer[];
   currentQuestion: number;
   isAnswerRight: boolean;
 };
