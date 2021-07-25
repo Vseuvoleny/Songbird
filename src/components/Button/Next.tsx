@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import "./styles.scss";
 
-interface INext {
+type NextButton = {
   isAnswerRight: boolean;
   nextQuestion: any;
-}
+};
 
-const Next: React.FC<INext> = ({ isAnswerRight, nextQuestion }) => {
+const Next: React.FC<NextButton> = ({ isAnswerRight, nextQuestion }) => {
   return (
     <div className="button_next_container">
       <button
@@ -21,16 +21,7 @@ const Next: React.FC<INext> = ({ isAnswerRight, nextQuestion }) => {
   );
 };
 
-function mapStateToProps(state: any) {
-  return {
-    isAnswerRight: state.isAnswerRight
-  };
-}
-
-function mapDispatchToProps(dispatch: any) {
-  return {
-    nextQuestion: () => dispatch({ type: "NEXT_QUESTION" })
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Next);
+export default connect(
+  (state: any) => ({ isAnswerRight: state.isAnswerRight }),
+  (dispatch) => ({ nextQuestion: () => dispatch({ type: "NEXT_QUESTION" }) })
+)(Next);

@@ -1,13 +1,15 @@
 import randomData from "../Reducers/Random/randomData";
+import birdsData from "../data/birdsData";
+import { State } from '../types/types'
 
-const initialState = {
+const initialState: State = {
   currentQuestion: 0,
   currentPlayerAnswer: null,
   isAnswerRight: false,
   score: 0,
   numberOfAttempts: 5,
   isGameFinished: false,
-  questions: randomData()
+  questions: randomData(birdsData)
 };
 
 export default function rootReducer(state = initialState, action: any) {
@@ -47,15 +49,7 @@ export default function rootReducer(state = initialState, action: any) {
       };
 
     case "NEW_GAME":
-      return {
-        currentQuestion: 0,
-        currentPlayerAnswer: null,
-        isAnswerRight: false,
-        score: 0,
-        numberOfAttempts: 5,
-        isGameFinished: false,
-        questions: randomData()
-      };
+      return initialState;
   }
 
   return state;

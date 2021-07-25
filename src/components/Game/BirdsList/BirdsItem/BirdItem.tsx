@@ -1,66 +1,76 @@
-import React, { useState } from "react";
-import "./styles.scss";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { BirdsAnswer } from "../../../../types/types";
+import "./styles.scss";
 
-interface IBirdItem{
-  title: string,
-  setPlayerAnswer: Function,
-  answer: any,
-  checkIsAnswerRight: 
-}
+type IBirdItem = {
+  title: string;
+  setPlayerAnswer: Function;
+  answer: number;
+  checkIsAnswerRight: Function;
+  answerWasRight: Function;
+  numberOfAttempts: number;
+  subAttempts: Function;
+  questions: BirdsAnswer[];
+  currentQuestion: number;
+  isAnswerRight: boolean;
+};
 
 const BirdItem: React.FC<IBirdItem> = ({
   title,
-  setPlayerAnswer,
   answer,
   checkIsAnswerRight,
   answerWasRight,
   numberOfAttempts,
-  subAttempts
+  subAttempts,
+  isAnswerRight,
+  currentQuestion,
 }) => {
-  const handlePlayerAnswer = (e: MouseEvent) => {
-    const target = e.target;
+  const [selectedVariant, setSelectedVariant] = useState<string>("");
 
-    setPlayerAnswer(answer);
+  useEffect(() => {
+    setSelectedVariant("");
+  }, [currentQuestion]);
+
+  const handlePlayerAnswer = () => {
+    if (isAnswerRight) return;
     if (checkIsAnswerRight(answer)) {
-      setIsRightAnswer(target);
+      setSelectedVariant("success");
       answerWasRight(numberOfAttempts);
     } else {
-      target.className = `${target.className} error`;
       subAttemtps(numberOfAttempts);
+      setSelectedVariant("error");
     }
   };
 
-  const [isRightAnswer, setIsRightAnswer] = useState("");
-
   const subAttemtps = (attempts: number) => {
-    if (attempts > 0) {
-      subAttempts();
-    }
-    return undefined;
+    if (attempts > 0) subAttempts();
   };
 
   return (
-    <li className={`bird-item ${isRightAnswer}`} onClick={handlePlayerAnswer}>
+    <li className={`bird-item ${selectedVariant}`} onClick={handlePlayerAnswer}>
       {title}
     </li>
   );
 };
 
-function mapStateToProps({numberOfAttempts}: any) {
-  return {
-    numberOfAttempts: numberOfAttempts
-  };
-}
-
 function mapDispatchToProps(dispatch: any) {
   return {
-    setPlayerAnswer: (answer: any) =>
+    setPlayerAnswer: (answer: number) =>
       dispatch({ type: "PLAYER_ANSWER", payload: answer }),
     answerWasRight: (numberOfAttempts: number) =>
       dispatch({ type: "ANSWER_WAS_RIGHT", payload: numberOfAttempts }),
-    subAttempts: () => dispatch({ type: "ANSWER_WAS_WRONG" })
+    subAttempts: () => dispatch({ type: "ANSWER_WAS_WRONG" }),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BirdItem);
+export default connect(
+  (state: any) => ({
+    numberOfAttempts: state.numberOfAttempts,
+    questions: state.questions,
+    currentQuestion: state.currentQuestion,
+    isAnswerRight: state.isAnswerRight,
+    currentLevel: state.currentLevel,
+  }),
+  mapDispatchToProps
+)(BirdItem);

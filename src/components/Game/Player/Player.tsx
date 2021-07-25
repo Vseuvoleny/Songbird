@@ -3,19 +3,27 @@ import logo from "./images/swift.png";
 import { fail, success } from "./MusicData/index";
 import { connect } from "react-redux";
 import "./styles.scss";
+import { State } from "../../../types/types";
+
+type Player = {
+  isAnswerRight: boolean;
+  questions: any;
+  currentLevel: number;
+  currentPlayerAnswer: number;
+};
 
 const Player = ({
   isAnswerRight,
   questions,
   currentLevel,
-  currentPlayerAnswer
-}) => {
+  currentPlayerAnswer,
+}: Player) => {
   useEffect(() => {
-    setCurrentQuestion(questions[currentLevel]);
+    setCurrentQuestion(questions[currentLevel].rightAnswer);
   }, [currentLevel]);
 
   useEffect(() => {
-    if (currentPlayerAnswer) {
+    if (currentPlayerAnswer && ref.current) {
       ref.current.play();
     }
   }, [currentPlayerAnswer]);
@@ -24,7 +32,7 @@ const Player = ({
     questions[currentLevel]
   );
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLAudioElement>(null);
 
   return (
     <>
@@ -39,15 +47,15 @@ const Player = ({
           <div className="img_block">
             <img
               className="img"
-              src={currentQuestion.rightAnswer.image}
-              alt={currentQuestion.rightAnswer.name}
+              src={currentQuestion.image}
+              alt={currentQuestion.name}
             />
           </div>
           <div className="audio_block">
-            <h5 className="title">{currentQuestion.rightAnswer.name}</h5>
+            <h5 className="title">{currentQuestion.name}</h5>
             <hr />
             <div className="audio">
-              <audio controls src={currentQuestion.rightAnswer.audio}>
+              <audio controls src={currentQuestion.audio}>
                 Your browser does not support the
                 <code>audio</code> element.
               </audio>
@@ -63,7 +71,7 @@ const Player = ({
             <h5 className="title">****</h5>
             <hr />
             <div className="audio">
-              <audio controls src={currentQuestion.rightAnswer.audio}>
+              <audio controls src={currentQuestion.audio}>
                 Your browser does not support the
                 <code>audio</code> element.
               </audio>
@@ -75,12 +83,12 @@ const Player = ({
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     isAnswerRight: state.isAnswerRight,
     questions: state.questions,
     currentLevel: state.currentQuestion,
-    currentPlayerAnswer: state.currentPlayerAnswer
+    currentPlayerAnswer: state.currentPlayerAnswer,
   };
 }
 

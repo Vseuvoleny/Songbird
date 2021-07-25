@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Next from "../Button/Next";
 import Header from "../Header/Header";
-import ActiveGame from "./ActiveGame/ActiveGame";
+import BirdsList from "./BirdsList/BirdsList";
+import BirdsTitle from "./BirdsTitle/BirdsTitle";
 import EndGame from "./EndGame/EndGame";
 import BirdLevels from "./Nav/BirdLevels";
+import Player from "./Player/Player";
 import "./styles.scss";
 
 interface IGame {
@@ -18,7 +20,7 @@ export const Game: React.FC<IGame> = ({
   isGameFinished,
   currentLevel,
   questions,
-  gameOver
+  gameOver,
 }) => {
   useEffect(() => {
     if (currentLevel === questions.length) {
@@ -33,7 +35,9 @@ export const Game: React.FC<IGame> = ({
         <EndGame />
       ) : (
         <div className="current_game">
-          <ActiveGame />
+          <Player />
+          <BirdsList />
+          <BirdsTitle />
           <Next />
         </div>
       )}
@@ -41,18 +45,13 @@ export const Game: React.FC<IGame> = ({
   );
 };
 
-function mapStateToProps(state: any) {
-  return {
+export default connect(
+  (state: any) => ({
     questions: state.questions,
     currentLevel: state.currentQuestion,
-    isGameFinished: state.isGameFinished
-  };
-}
-
-function mapDispatchToProps(dispatch: any) {
-  return {
-    gameOver: () => dispatch({ type: "GAME_OVER" })
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+    isGameFinished: state.isGameFinished,
+  }),
+  (dispatch) => ({
+    gameOver: () => dispatch({ type: "GAME_OVER" }),
+  })
+)(Game);

@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BirdsData } from "../../../types/types";
 import "./styles.scss";
 
-interface IEndGame {
+type EndGame = {
   score: number;
-  questions: any[];
+  questions: BirdsData[];
   startNewGame: Function;
-}
+};
 
-const EndGame: React.FC<IEndGame> = ({ score, questions, startNewGame }) => {
+const EndGame: React.FC<EndGame> = ({ score, questions, startNewGame }) => {
   const repeatGame = () => startNewGame();
 
   return (
@@ -35,13 +36,13 @@ const EndGame: React.FC<IEndGame> = ({ score, questions, startNewGame }) => {
 function mapStateToProps(state: any) {
   return {
     score: state.score,
-    questions: state.questions
+    questions: state.questions,
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    startNewGame: () => dispatch({ type: "NEW_GAME" })
+    startNewGame: () => dispatch({ type: "NEW_GAME" }),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EndGame);

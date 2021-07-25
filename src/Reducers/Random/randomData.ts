@@ -1,10 +1,17 @@
-import birdsData from "../../Data/birdsData";
-import randomize from "../../utils/randomize";
+import { randomize } from "../../utils/randomize";
+import { BirdsData, BirdsAnswer } from '../../types/types'
 
-const randomData = () =>
-  birdsData.map(birds => ({
-    rightAnswer: birds[randomize(birds.length)],
-    variants: birds
-  }));
+const randomData = (data: BirdsData[][]): any[] => {
+
+  const x = data.map((birds: any) => {
+    return ({
+
+      rightAnswer: birds[randomize(birds.length)],
+      variants: birds
+    })
+  })
+
+  return x
+};
 
 export default randomData;

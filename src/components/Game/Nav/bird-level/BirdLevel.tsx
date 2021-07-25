@@ -1,7 +1,11 @@
 import React from "react";
 import "./styles.scss";
 
-const BirdLevel = ({ title, addActive }) => (
+type BirdsLevel = {
+  title: any;
+  addActive: string;
+};
+const BirdLevel = ({ title, addActive }: BirdsLevel) => (
   <li className={`item ${addActive}`}>{title}</li>
 );
 export default BirdLevel;

@@ -9,10 +9,15 @@ enum birdTitle {
   sparrows = "Воробьиные птицы",
   forestBird = "Лесные птицы",
   predatorBirds = "Хищные птицы",
-  seaBirds = "Морские птицы"
+  seaBirds = "Морские птицы",
 }
 
-const BirdLevels = ({ questions, currentQuestion }) => {
+type BirdsLevels = {
+  questions: any;
+  currentQuestion: number;
+};
+
+const BirdLevels = ({ questions, currentQuestion }: BirdsLevels) => {
   const getLevelTitle = (index: number) => {
     switch (index) {
       case 0:
@@ -32,22 +37,22 @@ const BirdLevels = ({ questions, currentQuestion }) => {
     }
   };
 
-  const renderLevels = questions =>
-    questions.map((_bird, idx) => (
+  const renderLevels = (questions: any) =>
+    questions.map((_bird: any, idx: number) => (
       <BirdLevel
         title={getLevelTitle(idx)}
         key={idx}
-        addActive={currentQuestion === idx ? "active" : null}
+        addActive={currentQuestion === idx ? "active" : ""}
       />
     ));
 
   return <ul className="navigation-list">{renderLevels(questions)}</ul>;
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: { currentQuestion: any; questions: any }) {
   return {
     currentQuestion: state.currentQuestion,
-    questions: state.questions
+    questions: state.questions,
   };
 }
 
