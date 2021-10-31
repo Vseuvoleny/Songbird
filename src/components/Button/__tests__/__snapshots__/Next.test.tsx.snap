@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Next should clicked 1`] = `
+<div>
+  <div
+    class="button_next_container"
+  >
+    <button
+      class="button"
+    >
+      Next Level
+    </button>
+  </div>
+</div>
+`;

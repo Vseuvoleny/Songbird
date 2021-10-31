@@ -4,7 +4,7 @@ import "./styles.scss";
 
 type NextButton = {
   isAnswerRight: boolean;
-  nextQuestion: () => {};
+  nextQuestion: Function;
 };
 
 const Next: React.FC<NextButton> = ({ isAnswerRight, nextQuestion }) => {
@@ -13,7 +13,7 @@ const Next: React.FC<NextButton> = ({ isAnswerRight, nextQuestion }) => {
       <button
         disabled={!isAnswerRight}
         className="button"
-        onClick={nextQuestion}
+        onClick={() => nextQuestion()}
       >
         Next Level
       </button>
@@ -21,7 +21,4 @@ const Next: React.FC<NextButton> = ({ isAnswerRight, nextQuestion }) => {
   );
 };
 
-export default connect(
-  (state: any) => ({ isAnswerRight: state.isAnswerRight }),
-  (dispatch) => ({ nextQuestion: () => dispatch({ type: "NEXT_QUESTION" }) })
-)(Next);
+export default Next;

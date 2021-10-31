@@ -8,19 +8,15 @@ import BirdsTitle from "./BirdsTitle/BirdsTitle";
 import EndGame from "./EndGame/EndGame";
 import BirdLevels from "./Nav/BirdLevels";
 import Player from "./Player/Player";
+import { IGame } from "./type";
 import "./styles.scss";
-
-interface IGame {
-  isGameFinished: boolean;
-  currentQuestion: number;
-  questions: BirdsAnswer[];
-  gameOver: Function;
-}
 
 export const Game: React.FC<IGame> = ({
   isGameFinished,
   currentQuestion,
   questions,
+  isAnswerRight,
+  nextQuestion,
   gameOver,
 }) => {
   useEffect(() => {
@@ -39,7 +35,7 @@ export const Game: React.FC<IGame> = ({
           <Player />
           <BirdsList />
           <BirdsTitle />
-          <Next />
+          <Next isAnswerRight={isAnswerRight} nextQuestion={nextQuestion} />
         </div>
       )}
     </div>
@@ -51,8 +47,10 @@ export default connect(
     questions: state.questions,
     currentQuestion: state.currentQuestion,
     isGameFinished: state.isGameFinished,
+    isAnswerRight: state.isAnswerRight,
   }),
   (dispatch) => ({
     gameOver: () => dispatch({ type: "GAME_OVER" }),
+    nextQuestion: () => dispatch({ type: "NEXT_QUESTION" }),
   })
 )(Game);

@@ -1,5 +1,5 @@
 import randomData from "../Reducers/Random/randomData";
-import birdsData from "../data/birdsData";
+import birdsData from "../Reducers/Random/randomData";
 import { State } from '../types/types'
 
 const initialState: State = {

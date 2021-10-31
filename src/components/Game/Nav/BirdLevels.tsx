@@ -42,8 +42,8 @@ const BirdLevels = ({ questions, currentQuestion }: BirdsLevels) => {
     <ul className="navigation-list">
       {questions.map((_bird: any, idx: number) => (
         <BirdLevel
-          title={getLevelTitle(idx)}
           key={idx}
+          title={getLevelTitle(idx)}
           addActive={currentQuestion === idx ? "active" : ""}
         />
       ))}

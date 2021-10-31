@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { State } from "../../types/types";
+import { Header } from "./types";
 import "./styles.scss";
-
-type Header = {
-  score: number;
-};
 
 const Header: React.FC<Header> = ({ score }) => (
   <header className="game-header">
